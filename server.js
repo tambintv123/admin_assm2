@@ -14,12 +14,11 @@ app.use(express.static(__dirname + "/public"));
 // Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// get json from server
+app.use(express.json());
 // connection string
 const connectionString =
   "mongodb+srv://tambintv123:minhtam100902@cluster0.jdfddan.mongodb.net/?retryWrites=true&w=majority";
-
-// get json from server
-app.use(express.json());
 
 // connect to MongoDB Atlas
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
