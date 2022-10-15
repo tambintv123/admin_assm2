@@ -1,0 +1,194 @@
+<div class="card shadow border-0 mb-7">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div>
+      <h5 class="mb-0">Users</h5>
+    </div>
+    <!-- Actions -->
+    <div class="col-sm-6 col-12 text-sm-end">
+      <div class="mx-n1">
+        <button
+          id="btnCreate"
+          type="button"
+          class="btn d-inline-flex btn-sm btn-primary mx-1"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <span class="pe-2">
+            <i class="bi bi-plus"></i>
+          </span>
+          <span>Create</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+    <div class="alert-danger">
+      <div id="message"></div>
+    </div>
+    <!--Table-->
+    <table class="table table-hover table-responsive mb-0">
+      <!--Table head-->
+      <thead>
+        <tr>
+          <th scope="row">#</th>
+          <th class="th-lg"><a>First Name</a></th>
+          <th class="th-lg"><a href="">Last Name</a></th>
+          <th class="th-lg"><a href="">Username</a></th>
+          <th class="th-lg"><a href="">Date of birth</a></th>
+          <th class="th-lg"><a href="">Phone</a></th>
+          <th class="th-lg"><a href="">action</a></th>
+        </tr>
+      </thead>
+      <!--Table head-->
+      <!--Table body-->
+      <tbody>
+        <% for(var i = 0; i < users.length; i++) {%>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= users[i].firstName %></td>
+          <td><%= users[i].lastName %></td>
+          <td><%= users[i].username %></td>
+          <td><%= users[i].DoB %></td>
+          <td><%= users[i].phone %></td>
+          <td>
+            <button
+              id="btnEdit"
+              class="btn btn-warning"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              onclick="getEdit(`<%= users[i]._id %>`)"
+            >
+              <span class="pe-2">
+                <i class="bi bi-pencil"></i>
+              </span>
+              <span>Edit</span>
+            </button>
+            <button
+              id="btnDelete"
+              type="button"
+              class="btn btn-danger"
+              onclick="getDelete(`<%= users[i].username %>`)"
+            >
+              <!-- <a style="color: white" href="/users/<%= users[i]._id %>"> -->
+              Delete
+              <!-- </a> -->
+            </button>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+      <!--Table body-->
+    </table>
+    <!--Bottom Table UI-->
+    <div class="d-flex justify-content-center">
+      <!--Pagination -->
+    </div>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/users" method="post">
+            <div class="form-group">
+              <label for="firstName">First name</label>
+              <input
+                class="form-control"
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="First name"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="lastName">Last name</label>
+              <input
+                class="form-control"
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Last name"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="username">Username</label>
+              <input
+                class="form-control"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="DoB">Date of Birth</label>
+              <input
+                class="form-control"
+                type="text"
+                id="DoB"
+                name="DoB"
+                placeholder="Date of Birth (DD/MM/YY)"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="phone">Phone</label>
+              <input
+                class="form-control"
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="Phone number"
+                required
+              />
+            </div>
+            <div class="my-4 text-end">
+              <button
+                style="display: block"
+                id="btnSubmit"
+                type="submit"
+                class="btn btn-success"
+              >
+                Create
+              </button>
+              <button
+                style="display: none"
+                id="btnUpdate"
+                type="button"
+                class="btn btn-success"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>

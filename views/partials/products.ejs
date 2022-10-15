@@ -1,0 +1,204 @@
+<div class="card shadow border-0 mb-7">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div>
+      <h5 class="mb-0">Products</h5>
+    </div>
+    <!-- Actions -->
+    <div class="col-sm-6 col-12 text-sm-end">
+      <div class="mx-n1">
+        <button
+          type="button"
+          id="btnCreate"
+          class="btn d-inline-flex btn-sm btn-primary mx-1"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <span class="pe-2">
+            <i class="bi bi-plus"></i>
+          </span>
+          <span>Create</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <!-- Grid column -->
+      <div id="message"></div>
+    </div>
+    <!-- Grid row -->
+    <!--Table-->
+    <table class="table table-hover table-responsive mb-0">
+      <!--Table head-->
+      <thead>
+        <tr class="text-center">
+          <th scope="row">#</th>
+          <th class="th-lg"><a>Name</a></th>
+          <th class="th-lg"><a href="">Image</a></th>
+          <th class="th-lg"><a href="">Category</a></th>
+          <th class="th-lg"><a href="">Price</a></th>
+          <th class="th-lg"><a href="">Quantity</a></th>
+          <th class="th-lg"><a href="">Action</a></th>
+        </tr>
+      </thead>
+      <!--Table head-->
+      <!--Table body-->
+      <tbody class="text-center">
+        <% for(var i = 0; i < products.length; i++) {%>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= products[i].name %></td>
+          <td>
+            <img
+              style="width: 30%"
+              src="/assets/<%= products[i].image %>"
+              alt=""
+            />
+          </td>
+          <td><%= products[i].category %></td>
+          <td><%= products[i].price %></td>
+          <td><%= products[i].quantity %></td>
+          <td>
+            <button
+              id="btnEdit"
+              class="btn btn-warning"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              onclick="getEdit(`<%= products[i]._id %>`)"
+            >
+              <span class="pe-2">
+                <i class="bi bi-pencil"></i>
+              </span>
+              <span>Edit</span>
+            </button>
+            <button
+              id="btnDelete"
+              type="button"
+              class="btn btn-danger"
+              onclick="getDelete(`<%= products[i].name %>`)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+      <!--Table body-->
+    </table>
+    <!--Bottom Table UI-->
+    <div class="d-flex justify-content-center">
+      <!--Pagination -->
+
+      <!--/Pagination -->
+    </div>
+    <!--Bottom Table UI-->
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/products" method="post">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                class="form-control"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="image">Image</label>
+              <input
+                class="form-control"
+                type="file"
+                id="image"
+                name="image"
+                placeholder="Image"
+                value=""
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="category">Category</label>
+              <select
+                class="form-control"
+                id="category"
+                name="category"
+                required
+              >
+                <option value="">Type of phone</option>
+                <option value="Iphone">Iphone</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="Oppo">OPPO</option>
+              </select>
+            </div>
+            <div class="my-4 form-group">
+              <label for="price">Price</label>
+              <input
+                class="form-control"
+                type="number"
+                placeholder="Price"
+                id="price"
+                name="price"
+                required
+              />
+            </div>
+            <div class="my-4 form-group">
+              <label for="quantity">Quantity</label>
+              <input
+                class="form-control"
+                type="number"
+                placeholder="Quantity"
+                id="quantity"
+                name="quantity"
+                required
+              />
+            </div>
+            <div class="my-4 text-end">
+              <button
+                style="display: block"
+                id="btnSubmit"
+                type="submit"
+                class="btn btn-success"
+              >
+                Create
+              </button>
+              <!-- <button
+                style="display: none"
+                id="btnUpdate"
+                type="button"
+                class="btn btn-success"
+              >
+                Update
+              </button> -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>
